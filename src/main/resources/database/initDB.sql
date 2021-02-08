@@ -1,0 +1,25 @@
+DROP TABLE IF EXISTS booking;
+DROP SEQUENCE IF EXISTS booking_id_seq;
+DROP TABLE IF EXISTS rooms;
+DROP SEQUENCE IF EXISTS rooms_id_seq;
+
+CREATE TABLE rooms
+(
+    id  INTEGER PRIMARY KEY,
+    room_number  INTEGER NOT NULL,
+    room_floor  INTEGER NOT NULL,
+    beds_count INTEGER NOT NULL,
+    delete SMALLINT NOT NULL DEFAULT 0
+);
+CREATE SEQUENCE rooms_id_seq START WITH 3 INCREMENT BY 1;
+
+CREATE TABLE booking
+(
+    id  INTEGER PRIMARY KEY,
+    arrival_date DATE NOT NULL,
+    departure_date DATE NOT NULL,
+    delete SMALLINT NOT NULL DEFAULT 0,
+    room_id INTEGER,
+    FOREIGN KEY (room_id) REFERENCES rooms (id) ON DELETE NO ACTION
+);
+CREATE SEQUENCE booking_id_seq START WITH 3 INCREMENT BY 1;

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Vlad" id="1439225004329-1">
+        <createTable tableName="rooms">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="room_number" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_floor" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="beds_count" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delete" type="SMALLINT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="booking">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="arrival_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="departure_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delete" type="SMALLINT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="room_id" type="INTEGER">
+                <constraints foreignKeyName="room_id" references="rooms(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
+
+
+
